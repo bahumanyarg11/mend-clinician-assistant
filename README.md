@@ -21,10 +21,12 @@ responsibility remain with the psychologist.
 streamlit run part1_conversational/app_integrated.py
 ```
 
-> Model weights for the emotion/behaviour classifiers are not included in this repository.
-> The app uses, in order: the KG-aligned models in `part1_conversational/models/kg_emotion/` and
-> `part1_conversational/models/kg_behaviour/` (each holding `model/`, `thresholds.json`, `labels.json`),
-> then the older 11-class emotion / 8-class behaviour models, then keyword detection.
+> The KG-aligned emotion and behaviour models are in this repository under
+> `part1_conversational/models/kg_emotion/` and `part1_conversational/models/kg_behaviour/`.
+> Their weight files (`model.safetensors`, 499 MB + 269 MB) are stored with Git LFS: run `git lfs install`
+> once before cloning (or `git lfs pull` in an existing clone), otherwise you get small pointer files.
+> The app uses, in order: these KG-aligned models, then the older 11-class emotion / 8-class behaviour
+> models (not in the repository), then keyword detection.
 > `MEND_MODELS=legacy` skips the KG-aligned pair. On Windows, `Start-Mend.bat` starts Neo4j, the LLM and the app.
 
 ---

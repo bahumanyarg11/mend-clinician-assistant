@@ -1,0 +1,1 @@
+part1_conversational/models/kg_*/model/*.safetensors filter=lfs diff=lfs merge=lfs -text
