@@ -25,8 +25,11 @@ NEO4J = {
 }
 
 # ── ML models (Part 1: emotion + behaviour) ───────────────────────────────────
-# emotion_model_1 = 11-class RoBERTa (DEFAULT/active). emotion_model = alternate config.
+# kg_emotion / kg_behaviour = KG-aligned retrain (DEFAULT in model_server.py; MEND_MODELS=legacy reverts).
+# emotion_model_1 = 11-class RoBERTa (legacy fallback). emotion_model = alternate config.
 MODELS = {
+    "kg_emotion":       PART1 / "models/kg_emotion/model",       # 35 EmotionalState labels
+    "kg_behaviour":     PART1 / "models/kg_behaviour/model",     # 214 Behaviour / CognitivePattern / Symptom labels
     "emotion_active":   "emotion_model_1",
     "emotion_model_1":  PART1 / "models/emotion_model_1/emotion_model_1/model",
     "emotion_model":    PART1 / "models/emotion_model/emotion_model/models",   # alternate (weights not extracted)

@@ -4,6 +4,13 @@ model_server.py
 Loads the 3 custom-trained local models from the models/ directory.
 No internet or HuggingFace download needed — all weights are local.
 
+  DEFAULT — KG-aligned models (retrained 2026-10-28, training/kg_retrain), labels are KG node names
+    models/kg_emotion/   RoBERTa, 35 EmotionalState labels, multilabel
+    models/kg_behaviour/ DistilBERT, 214 labels (27 Behaviour, 14 CognitivePattern, 173 Symptom), multilabel
+    Decision: sigmoid >= max(per-label tuned threshold, floor). Floors stop rare labels with
+    under-tuned thresholds firing on near-zero scores. Set MEND_MODELS=legacy to use the old pair below.
+
+  LEGACY (fallback when models/kg_* is missing or fails to load):
   Model 1 — Emotion (11-class RoBERTa, multilabel)
     Path: models/emotion_model_1/emotion_model_1/model/
     Labels: anger, frustration, sadness, confusion, shame_guilt,
@@ -60,6 +67,15 @@ BEHAVIOUR_LABELS = [
     "Emotional_Expression", "Help_Seeking", "Active_Coping", "Conversational_Act"
 ]
 
+# ── KG-aligned models (default) ──────────────────────────────────────────────────
+KG_EMOTION_DIR   = _HERE / "models" / "kg_emotion"
+KG_BEHAVIOUR_DIR = _HERE / "models" / "kg_behaviour"
+USE_KG_MODELS    = os.environ.get("MEND_MODELS", "kg").lower() != "legacy"
+KG_EMOTION_FLOOR   = 0.6
+KG_BEHAVIOUR_FLOOR = 0.3
+KG_THRESHOLD_OVERRIDE = {"EmotionalState:Emptiness": 0.9}   # tuned to 0.5 vs ~0.85 for the rest; fired on most inputs
+KG_NEUTRAL = "Neutral"
+
 
 class ModelServer:
     """
@@ -76,9 +92,66 @@ class ModelServer:
         self._behaviour_model     = None
         self._behaviour_tokenizer = None
         self._behaviour_mode      = "keyword"
+        self._signals_cache       = (None, None)   # (text, signals): one behaviour pass serves behaviour + symptoms
 
-        self._load_emotion()
-        self._load_behaviour()
+        if not (USE_KG_MODELS and self._load_kg("emotion")):
+            self._load_emotion()
+        if not (USE_KG_MODELS and self._load_kg("behaviour")):
+            self._load_behaviour()
+
+    # ─────────────────────────── KG-ALIGNED MODELS ──────────────────────────────
+
+    def _load_kg(self, task: str) -> bool:
+        import json
+        d = KG_EMOTION_DIR if task == "emotion" else KG_BEHAVIOUR_DIR
+        if not (d / "model").exists():
+            logger.warning(f"KG {task} model not found at {d}. Using the legacy model.")
+            return False
+        try:
+            from transformers import AutoTokenizer, AutoModelForSequenceClassification
+            logger.info(f"Loading KG-aligned {task} model from {d}...")
+            tok   = AutoTokenizer.from_pretrained(str(d / "model"))
+            model = AutoModelForSequenceClassification.from_pretrained(str(d / "model")).eval()
+            labels = [model.config.id2label[i] for i in range(model.config.num_labels)]
+            tuned  = json.loads((d / "thresholds.json").read_text(encoding="utf-8"))
+            floor  = KG_EMOTION_FLOOR if task == "emotion" else KG_BEHAVIOUR_FLOOR
+            th     = [max(KG_THRESHOLD_OVERRIDE.get(l, tuned.get(l, 0.5)), floor) for l in labels]
+            if task == "emotion":
+                self._emotion_tokenizer, self._emotion_model = tok, model
+                self._kg_emotion = (labels, th)
+                self._emotion_mode = "kg_roberta_35"
+            else:
+                self._behaviour_tokenizer, self._behaviour_model = tok, model
+                self._kg_behaviour = (labels, th)
+                self._behaviour_mode = "kg_distilbert_214"
+            logger.info(f"  KG {task} model loaded OK ({len(labels)} labels).")
+            return True
+        except Exception as e:
+            logger.warning(f"KG {task} model load failed: {e}. Using the legacy model.")
+            return False
+
+    def _kg_scores(self, tok, model, labels, th, text) -> list[tuple[str, str, float]]:
+        """[(group, kg_name, prob)] for labels at or above their threshold, best first."""
+        import torch
+        enc = tok(text, return_tensors="pt", truncation=True, max_length=128)
+        with torch.no_grad():
+            probs = torch.sigmoid(model(**enc).logits[0]).tolist()
+        hits = [(*labels[i].split(":", 1), round(p, 4)) for i, p in enumerate(probs) if p >= th[i]]
+        return sorted(hits, key=lambda h: -h[2])
+
+    def predict_signals(self, text: str) -> dict:
+        """KG behaviour model output grouped by node type: {'behaviours': [(name, p)], 'cognitive_patterns': [...], 'symptoms': [...]}.
+        Names are KG node names (part2 structured_query maps the newer ones onto nodes the running graph has). Empty lists with the legacy model."""
+        if self._behaviour_mode != "kg_distilbert_214":
+            return {"behaviours": [], "cognitive_patterns": [], "symptoms": []}
+        if self._signals_cache[0] == text:
+            return self._signals_cache[1]
+        out = {"behaviours": [], "cognitive_patterns": [], "symptoms": []}
+        key = {"Behaviour": "behaviours", "CognitivePattern": "cognitive_patterns", "Symptom": "symptoms"}
+        for group, name, p in self._kg_scores(self._behaviour_tokenizer, self._behaviour_model, *self._kg_behaviour, text):
+            out[key[group]].append((name, p))
+        self._signals_cache = (text, out)
+        return out
 
     # ─────────────────────────── EMOTION ────────────────────────────────────────
 
@@ -125,7 +198,13 @@ class ModelServer:
     # ─────────────────────────── PREDICT ────────────────────────────────────────
 
     def predict_emotion(self, text: str) -> tuple[str, dict[str, float]]:
-        """Returns (top_label, {label: probability}) for all 11 emotion classes."""
+        """Returns (top_label, {label: probability}). Legacy: all 11 classes. KG model: only emotions above threshold, KG node names."""
+        if self._emotion_mode == "kg_roberta_35":
+            hits = self._kg_scores(self._emotion_tokenizer, self._emotion_model, *self._kg_emotion, text)
+            dist = {name: p for _, name, p in hits}
+            if not dist:
+                return KG_NEUTRAL, {KG_NEUTRAL: 1.0}
+            return next(iter(dist)), dist
         if self._emotion_mode == "roberta_custom":
             return self._infer_emotion_roberta(text)
         return _keyword_emotion(text)
@@ -151,15 +230,19 @@ class ModelServer:
         return top, dist
 
     def predict_behaviour(self, text: str) -> tuple[str, float]:
-        """Returns (label, confidence) for the 8 behaviour classes."""
+        """Returns (label, confidence). Legacy: one of 8 classes. KG model: the strongest Behaviour node, or 'Unclear'."""
+        if self._behaviour_mode == "kg_distilbert_214":
+            beh = self.predict_signals(text)["behaviours"]
+            return beh[0] if beh else ("Unclear", 0.0)
         if self._behaviour_mode == "distilbert_custom":
             return self._infer_behaviour_distilbert(text)
         label = _keyword_behaviour(text)
         return label, 0.6
 
     def predict_symptoms(self, text: str) -> list[str]:
-        """Returns a list of extracted symptom tags based on the 38 proposed criteria gaps."""
-        return _keyword_symptom(text)
+        """Symptom tags: KG Symptom nodes from the KG behaviour model, plus the keyword tags for the 38 proposed criteria gaps."""
+        found = [n for n, _ in self.predict_signals(text)["symptoms"]]
+        return found + [s for s in _keyword_symptom(text) if s not in found]
 
     def _infer_behaviour_distilbert(self, text: str) -> tuple[str, float]:
         import torch
@@ -177,8 +260,8 @@ class ModelServer:
         return {
             "emotion_model":   self._emotion_mode,
             "behaviour_model": self._behaviour_mode,
-            "emotion_model_dir":   str(EMOTION_MODEL_DIR),
-            "behaviour_model_dir": str(BEHAVIOUR_MODEL_DIR),
+            "emotion_model_dir":   str(KG_EMOTION_DIR if self._emotion_mode.startswith("kg_") else EMOTION_MODEL_DIR),
+            "behaviour_model_dir": str(KG_BEHAVIOUR_DIR if self._behaviour_mode.startswith("kg_") else BEHAVIOUR_MODEL_DIR),
         }
 
 

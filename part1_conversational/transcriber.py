@@ -129,8 +129,8 @@ class Transcriber:
         self.model_name = model_name
         self.cpu_threads = cpu_threads
 
-        # Auto-detect device
-        if device is None:
+        # Auto-detect device ("auto" is what app_integrated.py passes)
+        if device is None or device == "auto":
             import torch
             if torch.cuda.is_available():
                 device = "cuda"
@@ -156,11 +156,13 @@ class Transcriber:
                 f"with compute_type='{self.compute_type}'..."
             )
             t0 = time.time()
+            # ctranslate2 4.x rejects cpu_threads=None, so only pass it on CPU
+            threads = {"cpu_threads": self.cpu_threads} if self.device == "cpu" else {}
             self._model = WhisperModel(
                 self.model_name,
                 device=self.device,
                 compute_type=self.compute_type,
-                cpu_threads=self.cpu_threads if self.device == "cpu" else None,
+                **threads,
             )
             logger.info(f"Model loaded in {time.time() - t0:.1f}s")
         return self._model

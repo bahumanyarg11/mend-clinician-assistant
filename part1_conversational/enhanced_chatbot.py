@@ -304,7 +304,7 @@ def _is_acute(user_input: str, emotion_label: str, emotion_dist: dict) -> bool:
         return True
     el = (emotion_label or "").lower()
     if el in ("fear", "panic", "nervousness"):
-        probs = emotion_dist if isinstance(emotion_dist, dict) else {}
+        probs = {k.lower(): v for k, v in emotion_dist.items()} if isinstance(emotion_dist, dict) else {}   # KG model uses "Fear"
         peak = max([probs.get(k, 0.0) for k in ("fear", "panic", "nervousness", el)] or [0.0])
         if peak >= 0.75 and re.search(
                 r"\b(now|can'?t|racing|pounding|breathe|shaking|scared|panic)\b",
@@ -539,6 +539,7 @@ class EnhancedChatbot:
             "emotions_confirmed": kg_response.emotions_confirmed,
             "contexts":     kg_response.worsening_contexts,
             "session_profile": self.session_profile(),
+            "signals":      ms.predict_signals(user_input) if ms else {},
         }
 
         # ── Step 7: Log for EHR ─────────────────────────────────────────────────
@@ -631,6 +632,7 @@ class EnhancedChatbot:
             "emotions_confirmed": kg_response.emotions_confirmed,
             "contexts":     kg_response.worsening_contexts,
             "session_profile": self.session_profile(),
+            "signals":      ms.predict_signals(user_input) if ms else {},
         }
         yield {"type": "meta", "data": meta}
 

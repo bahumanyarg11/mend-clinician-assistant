@@ -51,6 +51,7 @@ EMOTION_LABEL_MAP: dict[str, str] = {
     "worry":            "Worry",
     "grief_loss":       "Grief",
     "embarrassment":    "Embarrassment",
+    "shameguilt":       "Shame",      # KG-aligned emotion model (2026-10-28)
 }
 
 BEHAVIOUR_LABEL_MAP: dict[str, str] = {
@@ -66,6 +67,15 @@ BEHAVIOUR_LABEL_MAP: dict[str, str] = {
     "Emotional_Expression": "SocialWithdrawal",     # broad expression → generic
     "Negative_Self_Talk":   "Rumination",           # self-talk is a form of rumination
     "Conversational_Act":   "HelpSeeking",          # reaching out = help-seeking
+    # KG-aligned behaviour model (2026-10-28): labels newer than the 'therapy' graph -> nearest existing node
+    "AvoidanceBehaviour":            "Avoidance",
+    "NegativeSelfTalk":              "Rumination",
+    "AggressionVerbalPhysical":      "Aggression",
+    "AngerOutburstWithDamage":       "Aggression",
+    "ImpulsiveAngerOutburst":        "Aggression",
+    "PlannedInstrumentalAggression": "Aggression",
+    "ReassuranceSeeking":            "HelpSeeking",
+    "CompanionSeeking":              "HelpSeeking",
 }
 
 

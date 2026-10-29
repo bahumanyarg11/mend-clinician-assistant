@@ -22,10 +22,17 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
 import streamlit as st
+
+
+def _pretty(label: str) -> str:
+    """'shame_guilt' / 'FeelingTenseOrOnEdge' -> 'Shame Guilt' / 'Feeling Tense Or On Edge'."""
+    label = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", " ", str(label).replace("_", " "))
+    return " ".join(w[:1].upper() + w[1:] for w in label.split())
 
 # ── Caching Heavy Models ─────────────────────────────────────────────────────────
 @st.cache_resource
@@ -40,9 +47,11 @@ def get_transcriber():
     return Transcriber(model_name="base", device="auto")
 
 # ── LLM selection — change these to switch models ───────────────────────────────
-BACKEND = "ollama"          # "ollama" | "openai" | "gemini" | "anthropic"
-MODEL   = "gemma4:26b"      # using remote lab computer over SSH
-API_KEY = ""                # Required for openai / gemini / anthropic
+# Start-Mend.bat sets these (lab gemma4:26b over an SSH tunnel, or a local model); the defaults are the old hard-coded values.
+BACKEND     = os.environ.get("LLM_BACKEND", "ollama")            # "ollama" | "openai" | "gemini" | "anthropic"
+MODEL       = os.environ.get("LLM_MODEL", "gemma4:26b")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
+API_KEY     = os.environ.get(f"{BACKEND.upper()}_API_KEY", "")   # Required for openai / gemini / anthropic
 
 # Session log directory (for EHR review later)
 LOG_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sessions")
@@ -117,7 +126,7 @@ BOT_VERSION = "2"   # streaming support added
 
 def _new_bot() -> EnhancedChatbot:
     import uuid
-    adapter = make_adapter(BACKEND, model=MODEL, api_key=API_KEY)
+    adapter = make_adapter(BACKEND, model=MODEL, api_key=API_KEY, host=OLLAMA_HOST)
     sid = f"session_{uuid.uuid4().hex[:8]}"
     return EnhancedChatbot(llm=adapter, session_id=sid, log_dir=LOG_DIR)
 
@@ -175,9 +184,18 @@ with st.sidebar:
     meta = st.session_state.last_meta
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Affect", meta.get("emotion", "neutral").replace("_", " ").title())
+        st.metric("Affect", _pretty(meta.get("emotion", "neutral")))
     with col2:
-        st.metric("Intent", meta.get("behaviour", "—").replace("_", " ").title())
+        st.metric("Intent", _pretty(meta.get("behaviour", "—")))
+
+    # Everything else the KG behaviour model picked up (behaviours, thinking patterns, symptoms)
+    signals = meta.get("signals") or {}
+    for key, title in (("behaviours", "Behaviours"), ("cognitive_patterns", "Thinking patterns"), ("symptoms", "Symptoms in the text")):
+        items = signals.get(key) or []
+        if items:
+            st.caption(title)
+            st.markdown(" ".join(f'<span class="kg-tag">{_pretty(n)} {p:.0%}</span>' for n, p in items[:6]),
+                        unsafe_allow_html=True)
 
     # KG confidence
     conf = meta.get("confidence", 0.0)
@@ -214,7 +232,7 @@ with st.sidebar:
         if profile.get("dominant_emotions"):
             st.caption("Emotional profile")
             emo_html = " ".join(
-                f'<span class="kg-tag">{e.replace("_", " ").title()}</span>'
+                f'<span class="kg-tag">{_pretty(e)}</span>'
                 for e in profile["dominant_emotions"][:3])
             st.markdown(emo_html, unsafe_allow_html=True)
 
@@ -297,11 +315,16 @@ with left:
     user_prompt = st.chat_input("Enter client statement, your notes, or a question...")
     audio_val = st.audio_input("Or dictate / record the client's statement...")
 
-    if user_prompt or audio_val:
+    # A recording stays in audio_val across reruns: only treat it as input once, and let typed text win.
+    audio_key = hash(audio_val.getvalue()) if audio_val else None
+    new_audio = audio_key is not None and audio_key != st.session_state.get("_last_audio")
+
+    if user_prompt or new_audio:
         final_text = ""
         is_audio = False
 
-        if audio_val:
+        if new_audio and not user_prompt:
+            st.session_state["_last_audio"] = audio_key
             is_audio = True
             import tempfile
             with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as f:
@@ -332,7 +355,7 @@ with left:
 
             # 2. Scrub PII
             scrubber = get_pii_scrubber()
-            scrubbed_text, audit = scrubber.scrub(final_text)
+            scrubbed_text, audit = scrubber.scrub_text(final_text)   # scrub() returns a ScrubbedText object; scrub_text() the (text, audit) pair
 
             # Inform user if PII was redacted
             if len(audit) > 0:
