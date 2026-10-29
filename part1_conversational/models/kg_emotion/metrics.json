@@ -1,0 +1,1760 @@
+{
+ "args": {
+  "task": "emotion",
+  "data": "/media/atr_ir/HDD/Therapy_train/Psychotherapy_MLKG/training/kg_retrain/data/emotion.jsonl",
+  "base": "SamLowe/roberta-base-go_emotions",
+  "epochs": 5,
+  "lr": 3e-05,
+  "batch": 64,
+  "max_len": 128,
+  "min_count": 30,
+  "max_pos_weight": 30.0,
+  "max_neg_per_pos": 0,
+  "gold_eval": null,
+  "seed": 42,
+  "max_rows": 0,
+  "out": "/media/atr_ir/HDD/Therapy_train/Psychotherapy_MLKG/training/kg_retrain/runs",
+  "rescore": "training/kg_retrain/runs/emotion_roberta-base-go_emotions_20261028_175647"
+ },
+ "gpu": "NVIDIA RTX A6000",
+ "train_minutes": 4.3,
+ "train_samples_per_second": 1393.159,
+ "n": {
+  "train": 71815,
+  "val": 8513,
+  "test": 8669
+ },
+ "labels_trained": 35,
+ "labels_dropped_too_few_rows": {},
+ "results": {
+  "val_tuned": {
+   "micro_f1": 0.6445,
+   "macro_f1": 0.6299,
+   "macro_f1_reliable": 0.6265,
+   "n": 8513,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.7791,
+     "precision": 0.7425,
+     "recall": 0.8195,
+     "support": 482,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.8371,
+     "precision": 0.7961,
+     "recall": 0.8826,
+     "support": 230,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.5423,
+     "precision": 0.5316,
+     "recall": 0.5534,
+     "support": 562,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.4851,
+     "precision": 0.3763,
+     "recall": 0.6825,
+     "support": 274,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.5578,
+     "precision": 0.543,
+     "recall": 0.5734,
+     "support": 143,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.5435,
+     "precision": 0.5387,
+     "recall": 0.5484,
+     "support": 279,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.6144,
+     "precision": 0.6309,
+     "recall": 0.5987,
+     "support": 157,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.5915,
+     "precision": 0.7683,
+     "recall": 0.4809,
+     "support": 131,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.623,
+     "precision": 0.4886,
+     "recall": 0.8593,
+     "support": 199,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.6724,
+     "precision": 0.6842,
+     "recall": 0.661,
+     "support": 59,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.4809,
+     "precision": 0.4378,
+     "recall": 0.5333,
+     "support": 165,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.5953,
+     "precision": 0.5787,
+     "recall": 0.6129,
+     "support": 186,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.5465,
+     "precision": 0.6483,
+     "recall": 0.4724,
+     "support": 199,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.7429,
+     "precision": 0.7647,
+     "recall": 0.7222,
+     "support": 18,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.6139,
+     "precision": 0.5962,
+     "recall": 0.6327,
+     "support": 98,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.8758,
+     "precision": 0.8627,
+     "recall": 0.8894,
+     "support": 226,
+     "threshold": 0.5,
+     "reliable": true
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.5,
+     "precision": 0.4698,
+     "recall": 0.5344,
+     "support": 262,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.6081,
+     "precision": 0.6066,
+     "recall": 0.6095,
+     "support": 210,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.4951,
+     "precision": 0.3838,
+     "recall": 0.6972,
+     "support": 109,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.8404,
+     "precision": 0.851,
+     "recall": 0.83,
+     "support": 406,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.8642,
+     "precision": 0.8309,
+     "recall": 0.9004,
+     "support": 251,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.4744,
+     "precision": 0.4559,
+     "recall": 0.4944,
+     "support": 449,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Love": {
+     "f1": 0.8554,
+     "precision": 0.8023,
+     "recall": 0.9159,
+     "support": 226,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.4551,
+     "precision": 0.4419,
+     "recall": 0.4691,
+     "support": 81,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.7347,
+     "precision": 0.7111,
+     "recall": 0.7599,
+     "support": 2070,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.6171,
+     "precision": 0.5802,
+     "recall": 0.6589,
+     "support": 214,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.8039,
+     "precision": 0.7736,
+     "recall": 0.8367,
+     "support": 98,
+     "threshold": 0.75,
+     "reliable": true
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.6083,
+     "precision": 0.5238,
+     "recall": 0.7253,
+     "support": 91,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.5041,
+     "precision": 0.488,
+     "recall": 0.5214,
+     "support": 117,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.7482,
+     "precision": 0.6933,
+     "recall": 0.8125,
+     "support": 64,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.7941,
+     "precision": 0.72,
+     "recall": 0.8852,
+     "support": 61,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.4886,
+     "precision": 0.4088,
+     "recall": 0.6072,
+     "support": 443,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.3836,
+     "precision": 0.2937,
+     "recall": 0.5526,
+     "support": 76,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.612,
+     "precision": 0.5385,
+     "recall": 0.7089,
+     "support": 79,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.5565,
+     "precision": 0.4761,
+     "recall": 0.6695,
+     "support": 357,
+     "threshold": 0.85,
+     "reliable": true
+    }
+   }
+  },
+  "test_all": {
+   "micro_f1": 0.6453,
+   "macro_f1": 0.6254,
+   "macro_f1_reliable": 0.6198,
+   "n": 8669,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.7763,
+     "precision": 0.7733,
+     "recall": 0.7793,
+     "support": 521,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.8567,
+     "precision": 0.8328,
+     "recall": 0.8819,
+     "support": 288,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.534,
+     "precision": 0.489,
+     "recall": 0.5882,
+     "support": 527,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.4693,
+     "precision": 0.3699,
+     "recall": 0.6418,
+     "support": 268,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.4967,
+     "precision": 0.4691,
+     "recall": 0.5278,
+     "support": 144,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.5331,
+     "precision": 0.4982,
+     "recall": 0.5732,
+     "support": 239,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.6387,
+     "precision": 0.6471,
+     "recall": 0.6306,
+     "support": 157,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.593,
+     "precision": 0.6484,
+     "recall": 0.5463,
+     "support": 108,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.6105,
+     "precision": 0.4741,
+     "recall": 0.8571,
+     "support": 203,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.6569,
+     "precision": 0.6338,
+     "recall": 0.6818,
+     "support": 66,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.4775,
+     "precision": 0.4802,
+     "recall": 0.4749,
+     "support": 179,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.5964,
+     "precision": 0.5577,
+     "recall": 0.6409,
+     "support": 181,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.4855,
+     "precision": 0.5563,
+     "recall": 0.4308,
+     "support": 195,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.8148,
+     "precision": 0.7857,
+     "recall": 0.8462,
+     "support": 13,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.6168,
+     "precision": 0.5546,
+     "recall": 0.6947,
+     "support": 95,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.9024,
+     "precision": 0.9083,
+     "recall": 0.8966,
+     "support": 232,
+     "threshold": 0.5,
+     "reliable": true
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.5823,
+     "precision": 0.5545,
+     "recall": 0.6131,
+     "support": 274,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.5858,
+     "precision": 0.6114,
+     "recall": 0.5622,
+     "support": 249,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.576,
+     "precision": 0.466,
+     "recall": 0.7539,
+     "support": 191,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.8657,
+     "precision": 0.8509,
+     "recall": 0.881,
+     "support": 395,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.8837,
+     "precision": 0.8597,
+     "recall": 0.9091,
+     "support": 209,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.4826,
+     "precision": 0.51,
+     "recall": 0.458,
+     "support": 500,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Love": {
+     "f1": 0.8375,
+     "precision": 0.7528,
+     "recall": 0.9437,
+     "support": 213,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.4409,
+     "precision": 0.4141,
+     "recall": 0.4713,
+     "support": 87,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.7414,
+     "precision": 0.7188,
+     "recall": 0.7654,
+     "support": 2161,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.6497,
+     "precision": 0.6322,
+     "recall": 0.6681,
+     "support": 229,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.8415,
+     "precision": 0.7841,
+     "recall": 0.9079,
+     "support": 76,
+     "threshold": 0.75,
+     "reliable": true
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.5953,
+     "precision": 0.5079,
+     "recall": 0.7191,
+     "support": 89,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.3661,
+     "precision": 0.3504,
+     "recall": 0.3832,
+     "support": 107,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.7059,
+     "precision": 0.6522,
+     "recall": 0.7692,
+     "support": 39,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.6552,
+     "precision": 0.5938,
+     "recall": 0.7308,
+     "support": 52,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.4986,
+     "precision": 0.4145,
+     "recall": 0.6256,
+     "support": 430,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.3689,
+     "precision": 0.2711,
+     "recall": 0.5769,
+     "support": 78,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.625,
+     "precision": 0.5217,
+     "recall": 0.7792,
+     "support": 77,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.5279,
+     "precision": 0.4476,
+     "recall": 0.6435,
+     "support": 345,
+     "threshold": 0.85,
+     "reliable": true
+    }
+   }
+  },
+  "test_crowd": {
+   "micro_f1": 0.5535,
+   "macro_f1": 0.3004,
+   "macro_f1_reliable": 0.5534,
+   "n": 1906,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.5698,
+     "precision": 0.6447,
+     "recall": 0.5104,
+     "support": 96,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.6042,
+     "precision": 0.5952,
+     "recall": 0.6135,
+     "support": 163,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.4848,
+     "precision": 0.3862,
+     "recall": 0.6512,
+     "support": 86,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.4967,
+     "precision": 0.4691,
+     "recall": 0.5278,
+     "support": 144,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.5891,
+     "precision": 0.5938,
+     "recall": 0.5846,
+     "support": 65,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.5153,
+     "precision": 0.4941,
+     "recall": 0.5385,
+     "support": 78,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.5816,
+     "precision": 0.6406,
+     "recall": 0.5325,
+     "support": 77,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.6265,
+     "precision": 0.5474,
+     "recall": 0.7324,
+     "support": 71,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.5,
+     "reliable": false
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.6017,
+     "precision": 0.5504,
+     "recall": 0.6636,
+     "support": 107,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.6267,
+     "precision": 0.6963,
+     "recall": 0.5697,
+     "support": 165,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.45,
+     "reliable": false
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.5829,
+     "precision": 0.5862,
+     "recall": 0.5795,
+     "support": 88,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.4238,
+     "precision": 0.4923,
+     "recall": 0.3721,
+     "support": 86,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Love": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.4364,
+     "precision": 0.4,
+     "recall": 0.48,
+     "support": 75,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.45,
+     "reliable": false
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.638,
+     "precision": 0.6047,
+     "recall": 0.6753,
+     "support": 77,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.75,
+     "reliable": false
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.6146,
+     "precision": 0.5175,
+     "recall": 0.7564,
+     "support": 78,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.545,
+     "precision": 0.4769,
+     "recall": 0.6358,
+     "support": 162,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.3689,
+     "precision": 0.2711,
+     "recall": 0.5769,
+     "support": 78,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.625,
+     "precision": 0.5217,
+     "recall": 0.7792,
+     "support": 77,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.5845,
+     "precision": 0.5497,
+     "recall": 0.6241,
+     "support": 133,
+     "threshold": 0.85,
+     "reliable": true
+    }
+   }
+  },
+  "test_gold": {
+   "micro_f1": 0.6524,
+   "macro_f1": 0.4744,
+   "macro_f1_reliable": 0.6041,
+   "n": 6284,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.8169,
+     "precision": 0.7951,
+     "recall": 0.84,
+     "support": 425,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.8567,
+     "precision": 0.8328,
+     "recall": 0.8819,
+     "support": 288,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.506,
+     "precision": 0.4506,
+     "recall": 0.5769,
+     "support": 364,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.4622,
+     "precision": 0.3625,
+     "recall": 0.6374,
+     "support": 182,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.5331,
+     "precision": 0.4982,
+     "recall": 0.5732,
+     "support": 239,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.674,
+     "precision": 0.6854,
+     "recall": 0.663,
+     "support": 92,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.593,
+     "precision": 0.6484,
+     "recall": 0.5463,
+     "support": 108,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.6105,
+     "precision": 0.4741,
+     "recall": 0.8571,
+     "support": 203,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.6569,
+     "precision": 0.6338,
+     "recall": 0.6818,
+     "support": 66,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.4456,
+     "precision": 0.4674,
+     "recall": 0.4257,
+     "support": 101,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.5964,
+     "precision": 0.5577,
+     "recall": 0.6409,
+     "support": 181,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.4195,
+     "precision": 0.4943,
+     "recall": 0.3644,
+     "support": 118,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.5833,
+     "precision": 0.5833,
+     "recall": 0.5833,
+     "support": 24,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.5,
+     "reliable": false
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.5689,
+     "precision": 0.5575,
+     "recall": 0.5808,
+     "support": 167,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.5169,
+     "precision": 0.4894,
+     "recall": 0.5476,
+     "support": 84,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.576,
+     "precision": 0.466,
+     "recall": 0.7539,
+     "support": 191,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.9444,
+     "precision": 0.9224,
+     "recall": 0.9674,
+     "support": 307,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.2105,
+     "precision": 0.1429,
+     "recall": 0.4,
+     "support": 5,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.4937,
+     "precision": 0.513,
+     "recall": 0.4758,
+     "support": 414,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Love": {
+     "f1": 0.8375,
+     "precision": 0.7528,
+     "recall": 0.9437,
+     "support": 213,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.4762,
+     "precision": 0.5556,
+     "recall": 0.4167,
+     "support": 12,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.7414,
+     "precision": 0.7188,
+     "recall": 0.7654,
+     "support": 2161,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.6558,
+     "precision": 0.6474,
+     "recall": 0.6645,
+     "support": 152,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.75,
+     "reliable": false
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.4348,
+     "precision": 0.4167,
+     "recall": 0.4545,
+     "support": 11,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.3661,
+     "precision": 0.3504,
+     "recall": 0.3832,
+     "support": 107,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.4,
+     "precision": 0.5,
+     "recall": 0.3333,
+     "support": 9,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.6552,
+     "precision": 0.5938,
+     "recall": 0.7308,
+     "support": 52,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.4736,
+     "precision": 0.3834,
+     "recall": 0.6194,
+     "support": 268,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.4991,
+     "precision": 0.4029,
+     "recall": 0.6557,
+     "support": 212,
+     "threshold": 0.85,
+     "reliable": true
+    }
+   }
+  },
+  "test_silver": {
+   "micro_f1": 0.8879,
+   "macro_f1": 0.1213,
+   "macro_f1_reliable": 0.8575,
+   "n": 479,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.8148,
+     "precision": 0.7857,
+     "recall": 0.8462,
+     "support": 13,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.9024,
+     "precision": 0.9083,
+     "recall": 0.8966,
+     "support": 232,
+     "threshold": 0.5,
+     "reliable": true
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.45,
+     "reliable": false
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.9148,
+     "precision": 0.9082,
+     "recall": 0.9216,
+     "support": 204,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Love": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.45,
+     "reliable": false
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.8415,
+     "precision": 0.7841,
+     "recall": 0.9079,
+     "support": 76,
+     "threshold": 0.75,
+     "reliable": true
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.7714,
+     "precision": 0.675,
+     "recall": 0.9,
+     "support": 30,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    }
+   }
+  },
+  "test_real": {
+   "micro_f1": 0.7003,
+   "macro_f1": 0.5288,
+   "macro_f1_reliable": 0.6398,
+   "n": 4487,
+   "per_label": {
+    "EmotionalState:Admiration": {
+     "f1": 0.8169,
+     "precision": 0.7951,
+     "recall": 0.84,
+     "support": 425,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Amusement": {
+     "f1": 0.8567,
+     "precision": 0.8328,
+     "recall": 0.8819,
+     "support": 288,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Anger": {
+     "f1": 0.6211,
+     "precision": 0.5021,
+     "recall": 0.8138,
+     "support": 145,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Annoyance": {
+     "f1": 0.4622,
+     "precision": 0.3625,
+     "recall": 0.6374,
+     "support": 182,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Anxiety": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Approval": {
+     "f1": 0.5331,
+     "precision": 0.4982,
+     "recall": 0.5732,
+     "support": 239,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Caring": {
+     "f1": 0.674,
+     "precision": 0.6854,
+     "recall": 0.663,
+     "support": 92,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Confusion": {
+     "f1": 0.593,
+     "precision": 0.6484,
+     "recall": 0.5463,
+     "support": 108,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Curiosity": {
+     "f1": 0.6105,
+     "precision": 0.4741,
+     "recall": 0.8571,
+     "support": 203,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Desire": {
+     "f1": 0.6569,
+     "precision": 0.6338,
+     "recall": 0.6818,
+     "support": 66,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disappointment": {
+     "f1": 0.4456,
+     "precision": 0.4674,
+     "recall": 0.4257,
+     "support": 101,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disapproval": {
+     "f1": 0.5964,
+     "precision": 0.5577,
+     "recall": 0.6409,
+     "support": 181,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Disgust": {
+     "f1": 0.5373,
+     "precision": 0.5902,
+     "recall": 0.4932,
+     "support": 73,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Elation": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Embarrassment": {
+     "f1": 0.5833,
+     "precision": 0.5833,
+     "recall": 0.5833,
+     "support": 24,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Emptiness": {
+     "f1": 0.8,
+     "precision": 0.6667,
+     "recall": 1.0,
+     "support": 2,
+     "threshold": 0.5,
+     "reliable": false
+    },
+    "EmotionalState:Excitement": {
+     "f1": 0.5478,
+     "precision": 0.5309,
+     "recall": 0.5658,
+     "support": 76,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Fear": {
+     "f1": 0.7184,
+     "precision": 0.6852,
+     "recall": 0.7551,
+     "support": 49,
+     "threshold": 0.95,
+     "reliable": true
+    },
+    "EmotionalState:Frustration": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.45,
+     "reliable": false
+    },
+    "EmotionalState:Gratitude": {
+     "f1": 0.9444,
+     "precision": 0.9224,
+     "recall": 0.9674,
+     "support": 307,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Grief": {
+     "f1": 0.5294,
+     "precision": 0.4286,
+     "recall": 0.6923,
+     "support": 13,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Joy": {
+     "f1": 0.6254,
+     "precision": 0.5818,
+     "recall": 0.6761,
+     "support": 142,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Love": {
+     "f1": 0.8375,
+     "precision": 0.7528,
+     "recall": 0.9437,
+     "support": 213,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Nervousness": {
+     "f1": 0.4762,
+     "precision": 0.5556,
+     "recall": 0.4167,
+     "support": 12,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Neutral": {
+     "f1": 0.783,
+     "precision": 0.7734,
+     "recall": 0.7929,
+     "support": 1468,
+     "threshold": 0.45,
+     "reliable": true
+    },
+    "EmotionalState:Optimism": {
+     "f1": 0.6558,
+     "precision": 0.6474,
+     "recall": 0.6645,
+     "support": 152,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:PositiveProgress": {
+     "f1": 0.5,
+     "precision": 0.5,
+     "recall": 0.5,
+     "support": 2,
+     "threshold": 0.75,
+     "reliable": false
+    },
+    "EmotionalState:Pride": {
+     "f1": 0.4348,
+     "precision": 0.4167,
+     "recall": 0.4545,
+     "support": 11,
+     "threshold": 0.9,
+     "reliable": false
+    },
+    "EmotionalState:Realization": {
+     "f1": 0.3661,
+     "precision": 0.3504,
+     "recall": 0.3832,
+     "support": 107,
+     "threshold": 0.85,
+     "reliable": true
+    },
+    "EmotionalState:Relief": {
+     "f1": 0.4706,
+     "precision": 0.5714,
+     "recall": 0.4,
+     "support": 10,
+     "threshold": 0.95,
+     "reliable": false
+    },
+    "EmotionalState:Remorse": {
+     "f1": 0.6552,
+     "precision": 0.5938,
+     "recall": 0.7308,
+     "support": 52,
+     "threshold": 0.9,
+     "reliable": true
+    },
+    "EmotionalState:Sadness": {
+     "f1": 0.5687,
+     "precision": 0.466,
+     "recall": 0.7295,
+     "support": 122,
+     "threshold": 0.8,
+     "reliable": true
+    },
+    "EmotionalState:Shame": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.8,
+     "reliable": false
+    },
+    "EmotionalState:ShameGuilt": {
+     "f1": 0.0,
+     "precision": 0.0,
+     "recall": 0.0,
+     "support": 0,
+     "threshold": 0.85,
+     "reliable": false
+    },
+    "EmotionalState:Surprise": {
+     "f1": 0.6087,
+     "precision": 0.4873,
+     "recall": 0.8105,
+     "support": 95,
+     "threshold": 0.85,
+     "reliable": true
+    }
+   }
+  }
+ },
+ "caveat": "test_weak / test_silver = agreement with keyword rules / NLI, not clinical accuracy; test_real = real text only (labels may still be rule/NLI); only human_gold measures real quality"
+}
