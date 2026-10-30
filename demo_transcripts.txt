@@ -1,0 +1,36 @@
+# Mend: short doctor-patient transcripts for the live-session demo.
+# One case per "###" block, lines in speaking order. "D:" / "P:" mark the true speaker so the demo can
+# score itself; transcript_assist.py removes them before Mend sees the text (as in a real voice transcript).
+
+### Case 1: low mood
+D: Thanks for coming in today. What's been bringing you here?
+P: I don't really know where to start. For a couple of months I've just felt flat, and nothing I used to enjoy feels fun anymore.
+D: When you say flat, how is that showing up in your day to day?
+P: I sleep ten hours and still wake up exhausted. I've stopped going to football with my friends because I just can't face it.
+D: It sounds like even the things that used to help have started to feel like effort.
+P: Yeah. And honestly I feel like a failure. Everyone else seems to cope and I can't even reply to a text.
+
+### Case 2: constant worry
+D: Tell me a bit about what a normal day has been like for you lately.
+P: My mind never switches off. From the moment I wake up I'm worrying about work, money, my parents' health, all of it at once.
+D: What happens in your body when the worrying gets going?
+P: My shoulders are always tight and I get headaches most days.
+P: And at night I lie awake for hours going over everything that could go wrong.
+D: How long has it been like this?
+P: Pretty much since last year. I know most of it never happens, but knowing that doesn't make it stop.
+
+### Case 3: sudden attacks
+D: You mentioned on the phone that something frightening happened last week. Can you walk me through it?
+P: I was in the supermarket and suddenly my heart started pounding, I couldn't breathe, and I honestly thought I was dying.
+D: That must have been really scary. What did you do?
+P: I dropped my basket and ran out to my car. Since then I've been avoiding shops and the bus in case it happens again.
+D: So the fear of the next one is starting to shape where you go.
+P: Exactly. I'm on edge all the time now, just waiting for it.
+
+### Case 4: hopelessness with risk
+D: Last time you said things had been getting heavier. How has this week been?
+P: Worse, to be honest. I've stopped seeing anyone and I barely leave my room.
+D: When it gets that heavy, what kinds of thoughts go through your mind?
+P: Mostly that everyone would be better off without me. I'm just a burden to my family.
+D: I'm really glad you told me that. Have you had any thoughts of ending your life?
+P: Not a plan or anything. But at night the thought that I don't want to be here anymore keeps coming back.
